@@ -7,7 +7,6 @@ import Logo from './components/navigation/Logo.js'
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm.js'
 import Rank from './components/Rank/Rank.js'
 import Particles from 'react-particles-js'
-import Clarifai from 'clarifai';
 
 import './App.css';
 
@@ -24,28 +23,26 @@ const particlesOptions = {
   }
 }
 
-//Clarifai app obj instantiation w/ apiKey
-const app = new Clarifai.App({
-  apiKey: '85dcb4daccb246df99e7f373119522b2'
-});
+
+const initialState = {
+  input: '',
+  imageURL: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
+}
 
 class App extends Component {
   constructor(){
     super();
-    this.state = {
-      input: '',
-      imageURL: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      }
-    }
+    this.state = initialState;
   }
   loadUser = (data) => {
     this.setState({user: {
@@ -79,9 +76,14 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageURL: this.state.input})
-    app.models.predict(
-      Clarifai.FACE_DETECT_MODEL, 
-      this.state.input)
+      fetch('http://localhost:3000/imageurl',{
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input
+        })
+        })
+        .then(response => response.json())
         .then(response => {
           if(response){
             fetch('http://localhost:3000/image',{
@@ -109,7 +111,7 @@ class App extends Component {
   }
 
   render() {
-    const {isSignedIn, imageURL, route, box} = this.state
+    const {isSignedIn, imageURL, box} = this.state
     return (
       <div className="App">
         <Particles className='particles' params={particlesOptions}/>

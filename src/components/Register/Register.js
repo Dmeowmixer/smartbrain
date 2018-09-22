@@ -4,8 +4,8 @@ class Register extends React.Component {
     constructor(props) {
     super(props);
     this.state = {
-      signInEmail: '',
-      signInPassword: '',
+      email: '',
+      password: '',
       name: ''
     }
   }
@@ -28,9 +28,9 @@ class Register extends React.Component {
         name: this.state.name
       })
     })
-    .then(response=>response.json())
+    .then(response => response.json())
     .then(user=>{
-      if(user){
+      if(user.id){
         this.props.loadUser(user)
         this.props.onRouteChange('home')
       }
