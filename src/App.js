@@ -6,7 +6,7 @@ import Register from './components/Register/Register.js'
 import Logo from './components/navigation/Logo.js'
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm.js'
 import Rank from './components/Rank/Rank.js'
-import Particles from 'react-particles-js'
+import Particles from '/app/src/react-particles-js'
 
 import './App.css';
 
