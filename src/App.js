@@ -72,11 +72,11 @@ class App extends Component {
     this.setState({box: box});
   }
   onInputChange = (event) => {
-    this.setState({input: event.target.value})
+    this.setState({input: event.target.value});
   }
 
   onButtonSubmit = () => {
-    this.setState({imageURL: this.state.input})
+    this.setState({imageURL: this.state.input});
       fetch('https://gentle-plateau-89180.herokuapp.com/imageurl',{
         method: 'post',
         headers: {'Content-Type': 'application/json'},
@@ -87,7 +87,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if(response){
-          fetch('https://gentle-plateau-89180.herokuapp.com/register/image',{
+          fetch('https://gentle-plateau-89180.herokuapp.com/image',{
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -98,6 +98,7 @@ class App extends Component {
           .then(count => {
             this.setState(Object.assign(this.state.user, {entries : count}))
           })
+          .catch(console.log)
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
