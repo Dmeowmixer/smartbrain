@@ -10,6 +10,7 @@ import Particles from 'react-particles-js'
 
 import './App.css';
 
+// Background React Particles
 const particlesOptions = {
   //add options here, can make them responsive to mouse.
   particles: {
@@ -23,7 +24,7 @@ const particlesOptions = {
   }
 }
 
-
+// Initializes user and app state management
 const initialState = {
   input: '',
   imageURL: '',
@@ -56,6 +57,7 @@ class App extends Component {
   }
 
 
+// clarifiAPI outline box settings
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
@@ -75,6 +77,7 @@ class App extends Component {
     this.setState({input: event.target.value});
   }
 
+// Backend HIT
   onButtonSubmit = () => {
     this.setState({imageURL: this.state.input});
       fetch('https://gentle-plateau-89180.herokuapp.com/imageurl',{

@@ -1,7 +1,7 @@
 import React from 'react'
 import './ImageLinkForm.css'
 
-
+// Form field
 const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
   return (
     <div>
